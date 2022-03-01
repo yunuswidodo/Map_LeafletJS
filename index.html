@@ -35,14 +35,29 @@
     color: #222;
     background-color: #fff;
     }
+    .sidenav {
+    height: 100%;
+    width: 160px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 20px;
+  }
+
+
   </style>
 </head>
 <body>
+
   <div id="map"></div>
   <div class="ele-info">
     <div>Longitude:&nbsp;<span id="lng"></span></div>
     <div>Latitude:&nbsp;<span id="lat"></span></div>
   </div>
+  
   <script>
     // set tampilan map 
     mapboxgl.accessToken = 'pk.eyJ1IjoiYWhtYWR5dW51cyIsImEiOiJjbDA3a2x2MzYwMHdnM2NvMXl1aWhwMzJ2In0.9RhZ4wqb0C5KXlwm-j_U4A';
