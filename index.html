@@ -101,6 +101,7 @@
      
     let lng;
     let lat;
+    let feature;
     const lngDisplay = document.getElementById('lng');
     const latDisplay = document.getElementById('lat');
    
@@ -119,7 +120,10 @@
     marker.setLngLat(event.lngLat).addTo(map);
     lng = event.lngLat.lng;
     lat = event.lngLat.lat;
+     
+    
     console.log(`${lng}, ${lat}`);
+    console.log(`${feature.properties.title}`);
 
     lngDisplay.value = lng;
     latDisplay.value = lat;
