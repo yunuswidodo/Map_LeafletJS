@@ -23,40 +23,71 @@
     width: 100%;
     }
     
-    .ele-info {
-    position: absolute;
-    font-family: sans-serif;
-    margin-top: 5px;
-    margin-left: 5px;
-    padding: 5px;
-    width: 500px;
-    border: 1px solid black;
-    font-size: 20px;
-    color: #222;
-    background-color: #fff;
-    }
-    .sidenav {
-    height: 100%;
-    width: 160px;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #111;
-    overflow-x: hidden;
-    padding-top: 20px;
-  }
+    .card-detail 
+    {
+      position: absolute;
+      margin-top: 50px;
+      height: 200px;
+      margin-right: 5;
+      background: #fff;
+      right: 0;
+      margin-right: 10px;
+      width: 240px;
 
+    }
+
+    .card-detail form 
+    {
+      margin-top: 20px;
+      margin-left: 10px;
+      margin-right: 10px;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      font-weight: bold;
+      
+    }
+
+    .input_map 
+    {
+      width: 210px;
+      margin-top: 5px;
+      height: 25px;
+      border-radius: 4px;
+      margin-bottom: 10px;
+      padding-left: 5px;
+      
+    }
+
+   button 
+   {
+     margin-top: 10px;
+     display: block;
+     margin-left: auto;
+     margin-right: auto;
+     padding: 5px 32px;
+     background-color: #314ccd;
+     color: white;
+     font-size: bold;
+     border-radius: 12px; 
+
+   }
+  
 
   </style>
 </head>
 <body>
-
   <div id="map"></div>
-  <div class="ele-info">
-    <div>Longitude:&nbsp;<span id="lng"></span></div>
-    <div>Latitude:&nbsp;<span id="lat"></span></div>
+  
+  <div class="card-detail">
+    <form>
+      <label for="long">Longitude:</label><br>
+      <input type="text" class="input_map" id="lng" name="long"><br>
+      <label for="lat">Latitude:</label><br>
+      <input type="text" class="input_map" id="lat" name="lat">
+      <button>submit</button>
+    </form>
   </div>
+
+
   
   <script>
     // set tampilan map 
@@ -89,8 +120,11 @@
     lng = event.lngLat.lng;
     lat = event.lngLat.lat;
     console.log(`${lng}, ${lat}`);
-    lngDisplay.textContent = lng;
-    latDisplay.textContent = lat;
+
+    lngDisplay.value = lng;
+    latDisplay.value = lat;
+
+
     });
      
     const geocoder = new MapboxGeocoder({
@@ -111,30 +145,36 @@
     
     // After the map style has loaded on the page,
     // add a source layer and default styling for a single point
-    map.on('load', () => {
-    map.addSource('single-point', {
-    'type': 'geojson',
-    'data': {
-    'type': 'FeatureCollection',
-    'features': []
-    }
-    });
+    map.on('load', () => 
+    {
+      map.addSource('single-point', 
+      {
+        'type': 'geojson',
+        'data': 
+        {
+          'type': 'FeatureCollection',
+          'features': []
+        }
+      });
     
-    map.addLayer({
-    'id': 'point',
-    'source': 'single-point',
-    'type': 'circle',
-    'paint': {
-    'circle-radius': 10,
-    'circle-color': '#448ee4'
-    }
-    });
-    
-    // Listen for the `result` event from the Geocoder // `result` event is triggered when a user makes a selection
-    //  Add a marker at the result's coordinates
-    geocoder.on('result', (event) => {
-    map.getSource('single-point').setData(event.result.geometry);
-    });
+      map.addLayer(
+      {
+        'id': 'point',
+        'source': 'single-point',
+        'type': 'circle',
+        'paint': 
+        {
+          'circle-radius': 10,
+          'circle-color': '#448ee4'
+        }
+      });
+      
+      // Listen for the `result` event from the Geocoder // `result` event is triggered when a user makes a selection
+      //  Add a marker at the result's coordinates
+      geocoder.on('result', (event) => 
+      {
+        map.getSource('single-point').setData(event.result.geometry);
+      });
     });   
     </script>
    
