@@ -10,6 +10,8 @@
   <!-- geo coding -->
   <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js"></script>
   <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css" type="text/css" />
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
   <style>
     body {
     margin: 0;
@@ -102,6 +104,8 @@
     let lng;
     let lat;
     let feature;
+    
+    
     const lngDisplay = document.getElementById('lng');
     const latDisplay = document.getElementById('lat');
    
@@ -123,14 +127,41 @@
      
     
     console.log(`${lng}, ${lat}`);
-    console.log(`${feature.properties.title}`);
-
+    
+    // console.log("test " + lng + " " + lat); // sama saja yang atas
+ 
+    // masukin kedalam from html
     lngDisplay.value = lng;
     latDisplay.value = lat;
 
 
+    // convert lat & long to  address
+    
+    
+     const url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/'
+            + lng + ',' + lat
+            + '.json?access_token=' + mapboxgl.accessToken;
+  
+    
+    
+    $.getJSON(url, function(data) {
+
+      // var text = `Date: ${data.date}<br>
+      //       Time: ${data.time}<br>
+      //       Unix time: ${data.milliseconds_since_epoch}` 
+
+      console.log(typeof(data.features));
+    
+   });
+
+    // end convert
+    
+    
     });
-     
+
+    
+
+    // mecari alamat
     const geocoder = new MapboxGeocoder({
     // Initialize the geocoder
     accessToken: mapboxgl.accessToken, // Set the access token
@@ -180,7 +211,9 @@
         map.getSource('single-point').setData(event.result.geometry);
       });
     });   
+
+    
     </script>
    
 </body>
-</html>m
+</html>
