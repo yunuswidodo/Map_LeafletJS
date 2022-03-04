@@ -29,7 +29,7 @@
     {
       position: absolute;
       margin-top: 50px;
-      height: 200px;
+      height: 400px;
       margin-right: 5;
       background: #fff;
       right: 0;
@@ -59,6 +59,14 @@
       
     }
 
+    #address 
+    {
+      width: 210px;
+      border-radius: 4px;
+      padding-left: -105px;
+      border: 2px solid  black;
+    }
+
    button 
    {
      margin-top: 10px;
@@ -85,6 +93,10 @@
       <input type="text" class="input_map" id="lng" name="long"><br>
       <label for="lat">Latitude:</label><br>
       <input type="text" class="input_map" id="lat" name="lat">
+      <label for="lat">Alamat:</label><br>
+      <textarea id="address" name="input_map" rows="6" >
+        res
+        </textarea>
       <button>submit</button>
     </form>
   </div>
